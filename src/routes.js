@@ -4,15 +4,13 @@ import NotFoundView from './components/404.vue'
 
 // Import Views - Dash
 import DashboardView from './components/admin/views/Dashboard.vue'
-import TablesView from './components/admin/views/Tables.vue'
-import TasksView from './components/admin/views/Tasks.vue'
-import SettingView from './components/admin/views/Setting.vue'
-import AccessView from './components/admin/views/Access.vue'
-import ServerView from './components/admin/views/Server.vue'
-import ReposView from './components/admin/views/Repos.vue'
 import CinemaView from './components/admin/views/Cinema.vue'
 import EmployeeView from './components/admin/views/Employee.vue'
 import MovieView from './components/admin/views/Movie.vue'
+import RoomView from './components/admin/views/Room.vue'
+import ScheduleView from './components/admin/views/Schedule.vue'
+import TicketView from './components/admin/views/Ticket.vue'
+import UserView from './components/admin/views/User.vue'
 
 // Routes
 const routes = [
@@ -32,40 +30,28 @@ const routes = [
         meta: {description: 'Overview of environment'}
       },
       {
-        path: 'tables',
-        component: TablesView,
-        name: 'Tables',
-        meta: {description: 'Simple and advance table in CoPilot'}
+        path: 'user',
+        component: UserView,
+        name: 'User',
+        meta: {description: 'Quản lý thành viên', requiresAuth: true}
       },
       {
-        path: 'tasks',
-        component: TasksView,
-        name: 'Tasks',
-        meta: {description: 'Tasks page in the form of a timeline'}
+        path: 'movie',
+        component: MovieView,
+        name: 'Movie',
+        meta: {description: 'Quản lý phim'}
       },
       {
-        path: 'setting',
-        component: SettingView,
-        name: 'Settings',
-        meta: {description: 'User settings page'}
+        path: 'schedule',
+        component: ScheduleView,
+        name: 'Schedule',
+        meta: {description: 'Quản lý lịch chiếu'}
       },
       {
-        path: 'access',
-        component: AccessView,
-        name: 'Access',
-        meta: {description: 'Example of using maps'}
-      },
-      {
-        path: 'server',
-        component: ServerView,
-        name: 'Servers',
-        meta: {description: 'List of our servers', requiresAuth: true}
-      },
-      {
-        path: 'repos',
-        component: ReposView,
-        name: 'Repository',
-        meta: {description: 'List of popular javascript repos'}
+        path: 'ticket',
+        component: TicketView,
+        name: 'Ticket',
+        meta: {description: 'Quản lý vé'}
       },
       {
         path: 'cinema',
@@ -74,16 +60,16 @@ const routes = [
         meta: {description: 'Quản lý rạp chiếu'}
       },
       {
+        path: 'room',
+        component: RoomView,
+        name: 'Room',
+        meta: {description: 'Quản lý phòng chiếu'}
+      },
+      {
         path: 'employee',
         component: EmployeeView,
         name: 'Employee',
         meta: {description: 'Quản lý nhân viên'}
-      },
-      {
-        path: 'movie',
-        component: MovieView,
-        name: 'Movie',
-        meta: {description: 'Quản lý phim'}
       }
     ]
   }, {

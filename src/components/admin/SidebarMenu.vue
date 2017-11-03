@@ -6,7 +6,7 @@
         <span class="page">Dashboard</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/">
+    <router-link tag="li" class="pageLink" to="/admin/user">
       <a>
         <i class="fa fa-user"></i>
         <span class="page">Thành viên</span>
@@ -18,13 +18,13 @@
         <span class="page">Phim</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/admin/server">
+    <router-link tag="li" class="pageLink" to="/admin/schedule">
       <a>
         <i class="fa fa-calendar-check-o"></i>
         <span class="page">Lịch chiếu</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/repos">
+    <router-link tag="li" class="pageLink" to="/admin/ticket">
       <a>
         <i class="fa fa-ticket"></i>
         <span class="page">Vé</span>
@@ -36,7 +36,7 @@
         <span class="page">Rạp chiếu</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/access">
+    <router-link tag="li" class="pageLink" to="/admin/room">
       <a>
         <i class="fa fa-book"></i>
         <span class="page">Phòng chiếu</span>
