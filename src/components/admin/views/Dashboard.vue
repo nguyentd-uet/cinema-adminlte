@@ -2,7 +2,6 @@
   <!-- Main content -->
   <section class="content">
     <notify></notify>
-    <button @click="showMe">click</button>
     <!-- Info boxes -->
     <div class="row">
       <div class="col-md-3 col-sm-6 col-xs-12">
@@ -190,17 +189,6 @@ export default {
 
       new Chart(pieChartCanvas, pieConfig) // eslint-disable-line no-new
     })
-  },
-  methods: {
-    showMe () {
-      this.bus.$emit('notify-me', {
-        status: 'alert-success',
-        data: {
-          title: 'Success',
-          text: 'Thanh cong roi'
-        }
-      })
-    }
   }
 }
 </script>
