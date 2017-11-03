@@ -12,7 +12,7 @@
         <span class="page">Thành viên</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/setting">
+    <router-link tag="li" class="pageLink" to="/admin/movie">
       <a>
         <i class="fa fa-film"></i>
         <span class="page">Phim</span>
@@ -42,7 +42,7 @@
         <span class="page">Phòng chiếu</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/tasks">
+    <router-link tag="li" class="pageLink" to="/admin/employee">
       <a>
         <i class="fa fa-users"></i>
         <span class="page">Nhân viên</span>

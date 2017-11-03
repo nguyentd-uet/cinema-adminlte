@@ -11,6 +11,8 @@ import AccessView from './components/admin/views/Access.vue'
 import ServerView from './components/admin/views/Server.vue'
 import ReposView from './components/admin/views/Repos.vue'
 import CinemaView from './components/admin/views/Cinema.vue'
+import EmployeeView from './components/admin/views/Employee.vue'
+import MovieView from './components/admin/views/Movie.vue'
 
 // Routes
 const routes = [
@@ -70,6 +72,18 @@ const routes = [
         component: CinemaView,
         name: 'Cinema',
         meta: {description: 'Quản lý rạp chiếu'}
+      },
+      {
+        path: 'employee',
+        component: EmployeeView,
+        name: 'Employee',
+        meta: {description: 'Quản lý nhân viên'}
+      },
+      {
+        path: 'movie',
+        component: MovieView,
+        name: 'Movie',
+        meta: {description: 'Quản lý phim'}
       }
     ]
   }, {
