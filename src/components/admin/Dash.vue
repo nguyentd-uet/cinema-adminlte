@@ -78,17 +78,17 @@
             <li class="dropdown user user-menu">
               <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
                 <!-- The user image in the navbar-->
-                <img :src="demo.avatar" class="user-image" alt="User Image">
+                <img :src="userAvatar" class="user-image" alt="User Image">
                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                <span class="hidden-xs">{{ demo.displayName }}</span>
+                <span class="hidden-xs">{{ userEmail }}</span>
               </a>
               <ul class="dropdown-menu">
                 <!-- User image -->
                 <li class="user-header">
-                  <img :src="demo.avatar" class="img-circle" alt="User Image">
+                  <img :src="userAvatar" class="img-circle" alt="User Image">
 
                   <p>
-                    {{ demo.displayName }}
+                    {{ userEmail }}
                   </p>
                 </li>
                 
@@ -98,7 +98,7 @@
                     <a href="#" class="btn btn-default btn-flat">Profile</a>
                   </div>
                   <div class="pull-right">
-                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                    <a href="#" class="btn btn-default btn-flat" @click="signOut">Sign out</a>
                   </div>
                 </li>
               </ul>
@@ -108,7 +108,7 @@
       </nav>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <sidebar :display-name="demo.displayName" :picture-url="demo.avatar" />
+    <sidebar :display-name="userEmail" :picture-url="userAvatar" />
   
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -160,12 +160,14 @@ export default {
         fixed_layout: config.fixedLayout,
         hide_logo: config.hideLogoOnMobile
       },
-      error: ''
+      error: '',
+      defaultAvatar: '../../../static/img/default.jpg'
     }
   },
   computed: {
     ...mapState([
-      'userInfo'
+      'userInfo',
+      'user'
     ]),
     demo () {
       return {
@@ -174,11 +176,37 @@ export default {
         email: faker.internet.email(),
         randomCard: faker.helpers.createCard()
       }
+    },
+    userAvatar () {
+      if (this.user) {
+        if (this.user.avatar) {
+          return this.user.avatar
+        } else {
+          return this.defaultAvatar
+        }
+      }
+      return this.defaultAvatar
+    },
+    userEmail () {
+      if (this.user) {
+        if (this.user.email) {
+          return this.user.email
+        } else {
+          return ''
+        }
+      }
+      return ''
     }
   },
   methods: {
     changeloading () {
       this.$store.commit('TOGGLE_SEARCHING')
+    },
+    signOut () {
+      localStorage.setItem('token', null)
+      localStorage.setItem('user', null)
+      this.$store.commit('SIGN_OUT')
+      this.$router.push('/admin/login')
     }
   }
 }
