@@ -42,12 +42,12 @@
         <span class="page">Phòng chiếu</span>
       </a>
     </router-link>
-    <router-link tag="li" class="pageLink" to="/admin/employee">
+    <!-- <router-link tag="li" class="pageLink" to="/admin/employee">
       <a>
         <i class="fa fa-users"></i>
         <span class="page">Nhân viên</span>
       </a>
-    </router-link>
+    </router-link> -->
     
   </ul>
 </template>
