@@ -9,7 +9,7 @@
 
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                <input class="form-control" name="username" placeholder="Username" type="text" v-model="username">
+                <input class="form-control" name="email" placeholder="Email" type="text" v-model="email">
               </div>
 
               <div class="input-group">
@@ -29,6 +29,7 @@
 
 <script>
 import api from '../../api'
+import axios from 'axios'
 
 export default {
   name: 'Login',
@@ -36,59 +37,48 @@ export default {
     return {
       section: 'Login',
       loading: '',
-      username: '',
+      email: '',
       password: '',
       response: ''
     }
   },
   methods: {
     checkCreds () {
-      const {username, password} = this
-
       this.toggleLoading()
       this.resetResponse()
       this.$store.commit('TOGGLE_LOADING')
 
       /* Making API call to authenticate a user */
-      api.request('post', '/login', {username, password})
+      axios.post(api.login + '?email=' + this.email + '&password=' + this.password)
       .then(response => {
         this.toggleLoading()
 
         var data = response.data
         /* Checking if error object was returned from the server */
-        if (data.error) {
-          var errorName = data.error.name
-          if (errorName) {
-            this.response = errorName === 'InvalidCredentialsError'
-            ? 'Username/Password incorrect. Please try again.'
-            : errorName
-          } else {
-            this.response = data.error
-          }
-
-          return
-        }
+        console.log(data)
 
         /* Setting user in the state and caching record to the localStorage */
-        if (data.user) {
+        if (data.token) {
           var token = 'Bearer ' + data.token
 
-          this.$store.commit('SET_USER', data.user)
+          this.$store.commit('SET_USER', JSON.stringify(data))
           this.$store.commit('SET_TOKEN', token)
 
           if (window.localStorage) {
-            window.localStorage.setItem('user', JSON.stringify(data.user))
+            window.localStorage.setItem('user', JSON.stringify(data))
             window.localStorage.setItem('token', token)
           }
 
-          this.$router.push(data.redirect ? data.redirect : '/')
+          window.location.assign('/admin')
         }
       })
       .catch(error => {
         this.$store.commit('TOGGLE_LOADING')
-        console.log(error)
+        console.log(error.response)
 
-        this.response = 'Server appears to be offline'
+        if (error.response && error.response.statusText === 'Bad Request') {
+          this.response = 'Invalid Login'
+        }
         this.toggleLoading()
       })
     },
