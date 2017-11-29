@@ -10,5 +10,9 @@ export default {
   },
   SET_TOKEN (state, token) {
     state.token = token
+  },
+  SIGN_OUT (state) {
+    state.token = null
+    state.user = null
   }
 }
