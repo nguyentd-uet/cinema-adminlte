@@ -104,6 +104,7 @@ import 'datatables.net'
 import 'datatables.net-bs'
 import api from '../../../api'
 import notify from '../notify'
+import axios from 'axios'
 
 export default {
   name: 'Cinema',
@@ -125,7 +126,7 @@ export default {
   },
   methods: {
     getCinemas () {
-      api.request('get', '/Cinema')
+      axios.get(api.cinema)
       .then(response => {
         var data = response.data
         console.log(data)
@@ -167,7 +168,8 @@ export default {
       console.log(index, id)
       var confirm = window.confirm('Bạn có chắc chắn muốn xóa rạp?')
       if (confirm === true) {
-        api.request('delete', '/Cinema/' + id)
+        // api.request('delete', '/Cinema/' + id)
+        axios.delete(api.cinema + id)
         .then(response => {
           console.log(response.data)
           this.cinemas.splice(index, 1)
@@ -184,7 +186,8 @@ export default {
     },
     postCinema () {
       if (this.name !== '' && this.address !== '') {
-        api.request('post', '/Cinema', {name: this.name, address: this.address})
+        // api.request('post', '/Cinema', {name: this.name, address: this.address})
+        axios.post(api.cinema, {name: this.name, address: this.address})
         .then(response => {
           console.log(response.data)
           this.cinemas.push(response.data)
@@ -204,7 +207,8 @@ export default {
     },
     editCinema () {
       if (this.name !== '' && this.address !== '') {
-        api.request('put', '/Cinema/' + this.idCinema, {id: this.idCinema, name: this.name, address: this.address})
+        // api.request('put', '/Cinema/' + this.idCinema, {id: this.idCinema, name: this.name, address: this.address})
+        axios.put(api.cinema + this.idCinema, {id: this.idCinema, name: this.name, address: this.address})
         .then(response => {
           console.log(response.data)
           this.cinemas[this.index].name = this.name
