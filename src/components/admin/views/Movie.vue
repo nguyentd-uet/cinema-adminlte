@@ -143,8 +143,10 @@ import $ from 'jquery'
 // Require needed datatables modules
 import 'datatables.net'
 import 'datatables.net-bs'
+import axios from 'axios'
 import api from '../../../api'
 import notify from '../notify'
+import {genres} from '../../../constant'
 
 export default {
   name: 'Movie',
@@ -155,16 +157,7 @@ export default {
     return {
 			movies: [],
 			theads: ['Tên phim', 'Poster', 'Trailer', 'Thể loại', 'Độ dài', 'Hành động'],
-			genres: [
-				{id: 0, name: 'Hành động'},
-				{id: 1, name: 'Khoa học viễn tưởng'},
-				{id: 2, name: 'Hài hước'},
-				{id: 3, name: 'Kinh dị'},
-				{id: 4, name: 'Ma'},
-				{id: 5, name: 'Cổ trang'},
-				{id: 6, name: 'Kung fu'},
-				{id: 7, name: 'Lịch sử'}
-			],
+			genres: genres,
 			name: '',
 			poster: '',
 			trailer: '',
@@ -183,7 +176,8 @@ export default {
   },
   methods: {
     getMovies () {
-      api.request('get', '/Movie')
+      // api.request('get', '/Movie', {headers: {'Authorization': this.$store.state.token}})
+      axios.get(api.movie)
       .then(response => {
         var data = response.data
         console.log(data)
@@ -245,7 +239,8 @@ export default {
       console.log(index, id)
       var confirm = window.confirm('Bạn có chắc chắn muốn xóa phim này?')
       if (confirm === true) {
-        api.request('delete', '/Movie/' + id)
+        // api.request('delete', '/Movie/' + id, {id: id, Authorization: this.$store.state.token})
+        axios.delete(api.movie + id)
         .then(response => {
           console.log(response.data)
           this.movies.splice(index, 1)
@@ -253,7 +248,7 @@ export default {
           this.showNotify('alert-success', 'Success :)', 'Xóa phim thành công')
         })
         .catch(error => {
-          console.log(error)
+          console.log(error.response)
           this.showNotify('alert-danger', 'Error :\'(', error)
         })
       } else {
@@ -262,8 +257,10 @@ export default {
     },
     postMovie () {
       if (this.name !== '' && this.poster !== '' && this.trailer !== '' && this.duration !== '') {
-				api.request('post', '/Movie',
-					{name: this.name, poster: this.poster, trailer: this.trailer, genre: this.genre, duration: this.duration})
+				// api.request('post', '/Movie',
+        //   {name: this.name, poster: this.poster, trailer: this.trailer, genre: this.genre, duration: this.duration},
+        //   {headers: {'Authorization': this.$store.state.token}})
+        axios.post(api.movie, {name: this.name, poster: this.poster, trailer: this.trailer, genre: this.genre, duration: this.duration})
         .then(response => {
           console.log(response.data)
           this.movies.push(response.data)
@@ -283,8 +280,11 @@ export default {
     },
     editMovie () {
       if (this.name !== '' && this.poster !== '' && this.trailer !== '' && this.duration !== '') {
-        api.request('put', '/Movie/' + this.idMovie,
-            {id: this.idMovie, name: this.name, poster: this.poster, trailer: this.trailer, genre: this.genre, duration: this.duration})
+        // api.request('put', '/Movie/' + this.idMovie,
+        //     {id: this.idMovie, name: this.name, poster: this.poster, trailer: this.trailer, genre: this.genre, duration: this.duration},
+        //     {headers: {'Authorization': this.$store.state.token}})
+        axios.put(api.movie + this.idMovie,
+          {id: this.idMovie, name: this.name, poster: this.poster, trailer: this.trailer, genre: this.genre, duration: this.duration})
         .then(response => {
           console.log(response.data)
 					this.movies[this.index].name = this.name
