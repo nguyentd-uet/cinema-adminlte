@@ -21,6 +21,7 @@ const routes = [
   {
     path: '/admin/',
     component: DashView,
+    meta: {requiresAuth: true},
     children: [
       {
         path: 'dashboard',
@@ -33,7 +34,7 @@ const routes = [
         path: 'user',
         component: UserView,
         name: 'User',
-        meta: {description: 'Quản lý thành viên', requiresAuth: true}
+        meta: {description: 'Quản lý thành viên'}
       },
       {
         path: 'movie',
