@@ -73,7 +73,6 @@
                         <td>{{ item.schedule.showtime }}</td>
                         <td>{{ item.schedule.movie.name }}</td>
 												<td>{{ item.schedule.room.name }}</td>
-												<td>{{ item.schedule.room.cinema.name }}</td>
                         <td>
                           <button type="button" class="btn btn-primary" aria-label="Left Align"
                             data-toggle="modal" data-target="#modal" @click="showEditTicketModal(index, item.id)">
@@ -122,7 +121,7 @@ export default {
     return {
 			tickets: [],
 			schedules: [],
-      theads: ['Ghế', 'Giờ mua', 'Giờ chiếu', 'Tên phim', 'Tên phòng', 'Tên rạp', 'Hành động'],
+      theads: ['Ghế', 'Giờ mua', 'Giờ chiếu', 'Tên phim', 'Tên phòng', 'Hành động'],
 			seat: null,
 			buyDate: null,
 			schedule: null,
