@@ -1,5 +1,5 @@
 {
-  "name": "Cinema adminlte",
+  "name": "cinema-adminlte",
   "version": "0.0.1",
   "description": "A fully responsive admin template based on AdminLTE with vue.js integration",
   "scripts": {
